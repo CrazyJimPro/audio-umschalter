@@ -1,0 +1,8 @@
+{
+    "uuid": "audio-umschalter@crazyjimpro",
+    "name": "Audio-Umschalter",
+    "description": "Schaltet mit einem Klick zwischen zwei Audioausgängen um, z. B. Monitor-Lautsprecher und Headset.",
+    "version": "1.0.0",
+    "icon": "audio-headphones",
+    "max-instances": 1
+}

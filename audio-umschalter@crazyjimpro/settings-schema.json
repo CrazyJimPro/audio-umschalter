@@ -1,0 +1,43 @@
+{
+    "kopf-ziele": {
+        "type": "header",
+        "description": "Klick-Ziele (auswählen per Rechtsklick auf das Applet)"
+    },
+    "ziel1": {
+        "type": "generic",
+        "default": ""
+    },
+    "ziel2": {
+        "type": "generic",
+        "default": ""
+    },
+    "name1": {
+        "type": "entry",
+        "default": "",
+        "description": "Eigener Name für Klick-Ziel 1 (leer = automatisch)"
+    },
+    "name2": {
+        "type": "entry",
+        "default": "",
+        "description": "Eigener Name für Klick-Ziel 2 (leer = automatisch)"
+    },
+    "kopf-verhalten": {
+        "type": "header",
+        "description": "Verhalten"
+    },
+    "meldung": {
+        "type": "switch",
+        "default": true,
+        "description": "Beim Umschalten kurz anzeigen, welcher Ausgang jetzt aktiv ist"
+    },
+    "streams-mitnehmen": {
+        "type": "switch",
+        "default": true,
+        "description": "Laufende Wiedergabe (Musik, Videos, Anrufe) sofort mit umschalten"
+    },
+    "zeige-name": {
+        "type": "switch",
+        "default": false,
+        "description": "Namen des aktiven Ausgangs neben dem Symbol in der Leiste anzeigen"
+    }
+}
