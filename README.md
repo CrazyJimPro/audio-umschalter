@@ -1,4 +1,4 @@
-# Audio-Umschalter
+# <img src="audio-umschalter@crazyjimpro/icon.png" width="48" align="center" alt=""> Audio-Umschalter
 
 Ein Applet für die Leiste von **Linux Mint Cinnamon**. Ein Klick darauf schaltet den Ton um,
 zum Beispiel zwischen den **Lautsprechern am Monitor** und dem **Headset**. Du musst dafür nicht
@@ -13,6 +13,18 @@ mehr in die Klangeinstellungen.
 
 Das Applet benutzt dieselbe Technik wie Cinnamons eigenes Lautstärke-Symbol. Darum findest du
 hier genau die Ausgänge wieder, die auch in den Klangeinstellungen stehen.
+
+### Die Symbole in der Leiste
+
+| Symbol | Bedeutung |
+|:---:|---|
+| <img src="audio-umschalter@crazyjimpro/icons/audio-umschalter-headset-symbolic.svg" width="32" alt="Headset"> | Ton läuft über **Headset oder Kopfhörer** |
+| <img src="audio-umschalter@crazyjimpro/icons/audio-umschalter-monitor-symbolic.svg" width="32" alt="Monitor"> | Ton läuft über die **Lautsprecher im Monitor** (HDMI/DisplayPort) |
+| <img src="audio-umschalter@crazyjimpro/icons/audio-umschalter-lautsprecher-symbolic.svg" width="32" alt="Lautsprecher"> | Ton läuft über **Lautsprecher** (z. B. Boxen am Klinkenausgang) |
+
+In der Leiste erscheinen sie in der Farbe deines Themes. Welches Symbol zu welchem Klick-Ziel
+gehört, erkennt das Applet selbst. Du kannst es aber auch fest einstellen (siehe
+[Einstellungen](#einstellungen)).
 
 ---
 
@@ -142,4 +154,19 @@ python3 werkzeuge/symbole_erzeugen.py
 
 ---
 
-Version 1.1.0 · Lizenz: MIT
+## Versionen
+
+**1.1.0** (13.11.2026)
+- Eigene Symbole für Headset, Monitor und Lautsprecher statt der Theme-Symbole
+  (die sahen teils aus wie Netzwerk oder Lautstärke)
+- Buntes Bild für die Applet-Liste
+- Neue Einstellung „Symbol für Klick-Ziel 1/2“, um das Symbol fest vorzugeben
+- Installer kopiert jetzt auch Unterordner mit
+
+**1.0.0** (13.11.2026)
+- Erste Version: Linksklick schaltet zwischen zwei Klick-Zielen um, Rechtsklick-Menü mit allen
+  Ausgängen, laufende Wiedergabe wechselt mit, Installer setzt das Applet automatisch in die Leiste
+
+---
+
+Lizenz: MIT
