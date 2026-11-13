@@ -48,7 +48,7 @@ fi
 # --- Dateien kopieren --------------------------------------------------------
 info "Kopiere Applet nach $ZIEL"
 mkdir -p "$ZIEL"
-cp -f "$QUELLE"/* "$ZIEL"/
+cp -rf "$QUELLE"/. "$ZIEL"/
 ok "Dateien installiert"
 
 if ! command -v pactl >/dev/null 2>&1; then

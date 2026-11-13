@@ -7,7 +7,8 @@ mehr in die Klangeinstellungen.
 - **Linksklick:** zwischen deinen zwei Klick-Zielen umschalten
 - **Rechtsklick:** alle Ausgänge sehen und direkt einen wählen, Klick-Ziele festlegen
 - **Mittelklick:** Klangeinstellungen öffnen
-- Das Symbol zeigt, was gerade aktiv ist: 🎧 Headset/Kopfhörer, 🖥 Monitor (HDMI/DisplayPort), 🔈 Lautsprecher
+- Das Applet hat eigene Symbole: Headset, Monitor mit Ton oder Lautsprecherbox, je nachdem,
+  was gerade aktiv ist. Sie passen sich wie alle Leisten-Symbole automatisch der Farbe des Themes an
 - Musik, Videos oder Anrufe, die gerade laufen, wandern sofort mit auf den neuen Ausgang
 
 Das Applet benutzt dieselbe Technik wie Cinnamons eigenes Lautstärke-Symbol. Darum findest du
@@ -60,6 +61,7 @@ Rechtsklick auf das Symbol → **Konfigurieren …**
 | Einstellung | Bedeutung |
 |---|---|
 | Eigener Name für Klick-Ziel 1/2 | z. B. „Monitor“ und „Headset“ statt der langen Gerätenamen |
+| Symbol für Klick-Ziel 1/2 | Headset, Monitor oder Lautsprecher fest vorgeben, falls die automatische Erkennung danebenliegt |
 | Beim Umschalten kurz anzeigen … | kleine Meldung oben rechts nach jedem Klick (Standard: an) |
 | Laufende Wiedergabe sofort mit umschalten | Musik/Videos wechseln sofort mit (Standard: an) |
 | Namen neben dem Symbol anzeigen | zeigt den aktiven Ausgang als Text in der Leiste (Standard: aus) |
@@ -121,4 +123,23 @@ Rechtsklick auf die Leiste → **Fehlerbehebung** → **Cinnamon neu starten**
 
 ---
 
-Version 1.0.0 · Lizenz: MIT
+**Das Symbol zeigt das falsche Gerät (z. B. Lautsprecher statt Monitor)**
+Rechtsklick auf das Symbol → **Konfigurieren …** → bei **Symbol für Klick-Ziel 1/2** das richtige
+Symbol fest auswählen.
+
+---
+
+## Für Entwickler: Symbole ändern
+
+Die Symbole werden aus `werkzeuge/symbole_erzeugen.py` erzeugt (nur gefüllte Flächen, damit
+Cinnamon sie einfärben kann). Nach einer Änderung:
+
+```bash
+python3 werkzeuge/symbole_erzeugen.py
+```
+
+`icon.png` (Bild in der Applet-Liste) wird aus `werkzeuge/icon.svg` mit 64 × 64 Pixeln gerendert.
+
+---
+
+Version 1.1.0 · Lizenz: MIT

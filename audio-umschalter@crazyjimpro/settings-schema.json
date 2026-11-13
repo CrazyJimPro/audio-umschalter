@@ -21,6 +21,28 @@
         "default": "",
         "description": "Eigener Name für Klick-Ziel 2 (leer = automatisch)"
     },
+    "symbol1": {
+        "type": "combobox",
+        "default": "auto",
+        "description": "Symbol für Klick-Ziel 1",
+        "options": {
+            "Automatisch erkennen": "auto",
+            "Headset": "headset",
+            "Monitor": "monitor",
+            "Lautsprecher": "lautsprecher"
+        }
+    },
+    "symbol2": {
+        "type": "combobox",
+        "default": "auto",
+        "description": "Symbol für Klick-Ziel 2",
+        "options": {
+            "Automatisch erkennen": "auto",
+            "Headset": "headset",
+            "Monitor": "monitor",
+            "Lautsprecher": "lautsprecher"
+        }
+    },
     "kopf-verhalten": {
         "type": "header",
         "description": "Verhalten"

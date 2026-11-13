@@ -14,6 +14,7 @@ const Util = imports.misc.util;
 const Mainloop = imports.mainloop;
 const Cvc = imports.gi.Cvc;
 const St = imports.gi.St;
+const Gio = imports.gi.Gio;
 
 const UUID = "audio-umschalter@crazyjimpro";
 
@@ -32,6 +33,7 @@ class AudioUmschalter extends Applet.TextIconApplet {
         this._ausgaenge = new Map(); // Cvc-ID -> MixerUIDevice
         this._aktivId = null;
         this._timeoutId = 0;
+        this._iconOrdner = metadata.path + "/icons";
 
         this.settings = new Settings.AppletSettings(this, UUID, instanceId);
         const neu = () => this._aktualisieren();
@@ -39,6 +41,8 @@ class AudioUmschalter extends Applet.TextIconApplet {
         this.settings.bind("ziel2", "ziel2", neu);
         this.settings.bind("name1", "name1", neu);
         this.settings.bind("name2", "name2", neu);
+        this.settings.bind("symbol1", "symbol1", neu);
+        this.settings.bind("symbol2", "symbol2", neu);
         this.settings.bind("meldung", "meldung", null);
         this.settings.bind("streams-mitnehmen", "streamsMitnehmen", null);
         this.settings.bind("zeige-name", "zeigeName", neu);
@@ -146,16 +150,36 @@ class AudioUmschalter extends Applet.TextIconApplet {
         return origin ? `${desc} – ${origin}` : desc;
     }
 
-    _symbol(dev) {
-        if (!dev) return "audio-speakers-symbolic";
+    // Welches eigene Symbol passt: "headset", "monitor" oder "lautsprecher".
+    // Für die Klick-Ziele kann man es in den Einstellungen fest vorgeben.
+    _art(dev) {
+        if (!dev) return "lautsprecher";
+        const s = this._schluessel(dev);
+        if (s === this.ziel1 && this.symbol1 && this.symbol1 !== "auto") return this.symbol1;
+        if (s === this.ziel2 && this.symbol2 && this.symbol2 !== "auto") return this.symbol2;
         const text = [
             dev.get_description(), dev.get_origin(), dev.get_icon_name(), dev.get_port(),
         ].join(" ").toLowerCase();
         if (/headset|headphone|kopfh|hörer|hoerer|earphone|earbud|buds/.test(text))
-            return "audio-headphones-symbolic";
+            return "headset";
         if (/hdmi|displayport|monitor|bildschirm|display/.test(text))
-            return "video-display-symbolic";
-        return "audio-speakers-symbolic";
+            return "monitor";
+        return "lautsprecher";
+    }
+
+    _symbolPfad(art) {
+        return `${this._iconOrdner}/audio-umschalter-${art}-symbolic.svg`;
+    }
+
+    _symbolGicon(art) {
+        return new Gio.FileIcon({ file: Gio.File.new_for_path(this._symbolPfad(art)) });
+    }
+
+    // Menüeintrag mit eigenem Symbol
+    _symbolEintrag(text, art) {
+        const item = new PopupMenu.PopupIconMenuItem(text, "audio-speakers-symbolic", St.IconType.SYMBOLIC);
+        if (item._icon) item._icon.gicon = this._symbolGicon(art);
+        return item;
     }
 
     _melden(text) {
@@ -228,7 +252,7 @@ class AudioUmschalter extends Applet.TextIconApplet {
 
     _aktualisieren() {
         const aktiv = this._aktiv();
-        this.set_applet_icon_symbolic_name(this._symbol(aktiv));
+        this.set_applet_icon_symbolic_path(this._symbolPfad(this._art(aktiv)));
 
         if (this.zeigeName && aktiv) this.set_applet_label(this._kurzName(aktiv));
         else this.set_applet_label("");
@@ -262,7 +286,7 @@ class AudioUmschalter extends Applet.TextIconApplet {
             let text = this._langName(dev);
             if (s === this.ziel1) text += "   [Ziel 1]";
             else if (s === this.ziel2) text += "   [Ziel 2]";
-            const item = new PopupMenu.PopupIconMenuItem(text, this._symbol(dev), St.IconType.SYMBOLIC);
+            const item = this._symbolEintrag(text, this._art(dev));
             item.setShowDot(dev === aktiv);
             item.connect("activate", () => this._wechseln(dev));
             this._menuBereich.addMenuItem(item);
